@@ -13,14 +13,14 @@ void setup() {
 
 void loop() {
   buttonState = digitalRead(buttonPin);
-  Serial.println(buttonState); //Print the state of the button to the serial monitor
+  Serial.println(buttonState); // Print the state of the button to the serial monitor
 
-  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+  // check if the pushbutton is pressed
   if (buttonState == HIGH) {
-    // turn LED on:
+    // Close the claw
     myservo.write(180);
   } else {
-    // turn LED off:
+    // Return to base position
     myservo.write(90);
   }
 }
