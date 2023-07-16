@@ -10,6 +10,7 @@ void setup() {
   pinMode(A0, INPUT);
   pinMode(2, OUTPUT);
   Serial.begin(9600);
+  myservo.attach(9);
 }
 
 void loop() {
@@ -17,32 +18,24 @@ void loop() {
   int reading = analogRead(A0);
   Serial.println(reading);
 
-  if (reading > 100 && closed == false)
+  if (reading > 500 && closed == false)
   {
-    myservo.attach(9);
     angle = 90;
     myservo.write(angle);
     digitalWrite(2, HIGH);
     closed = true;
     delay(500);
-    myservo.detach();
   }
-  else if (reading > 100 && closed == true)
+  else if (reading > 500 && closed == true)
   {
-    myservo.attach(9);
     angle = 0;
-    myservo.write(0);
+    myservo.write(angle);
     digitalWrite(2, LOW);
     closed = false;
     delay(500);
-    myservo.detach();
   }
-  else 
+  else if (reading < 500)
   {
-    myservo.attach(9);
-    Serial.println(angle);
     myservo.write(angle);
-    delay(500);
-    myservo.detach();
   }
 }
